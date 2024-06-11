@@ -39,29 +39,86 @@ interface Props {
 }
 
 export const Typography = ({
-    variant = "h3", 
+    variant = "h3", // Variant par défaut
     component : Component = "div", 
-    theme = "black",
+    theme = "black", // Theme par défaut
     weight = "regular",
     className, 
-    children}:Props) => {
+    children
+}:Props) => {
 
-    let variantStyle: string = ""
+    let variantStyle: string = "", themeStyle: string = ""
+    
 
     switch (variant){
         case "display":
-            variantStyle = "text-red-500"
+            variantStyle = "text-8xl"
             break
         case "h1":
-            variantStyle = "text-green-500"
+            variantStyle = "text-7xl"
             break
+        case "h2":
+            variantStyle = "text-6xl"
+            break
+        case "h3": //Default
+            variantStyle = "text-5xl"
+            break
+        case "h4":
+            variantStyle = "text-4xl"
+            break
+        case "h5":
+            variantStyle = "text-3xl"
+            break
+        case "lead":
+            variantStyle = "text-2xl"
+            break
+        case "body-lg":
+            variantStyle = "text-lg"
+            break
+        case "body-base":
+            variantStyle = "text-base"
+            break
+        case "body-sm":
+            variantStyle = "text-sm"
+            break
+        case "caption1":
+            variantStyle = "text-caption1"
+            break
+        case "caption2":
+            variantStyle = "text-caption2"
+            break
+        case "caption3":
+            variantStyle = "text-caption3"
+            break
+        case "caption4":
+            variantStyle = "text-caption4"
+            break
+    }
+
+    switch (theme) {
+        case "black": // Default
+            themeStyle = "text-gray"
+            break;
+        case "gray":
+            themeStyle = "text-gray-700"
+            break;
+        case "white":
+            themeStyle = "text-white"
+            break;
+        case "primary":
+            themeStyle = "text-primary"
+            break;
+        case "secondary":
+            themeStyle = "text-secondary"
+            break;
     }
 
     return (
         <Component className={clsx(
-            variantStyle, 
+            variantStyle,
+            themeStyle, 
             weight === "medium" && "font-medium", 
-            className
+            className,
             )}>
 
             {children}
