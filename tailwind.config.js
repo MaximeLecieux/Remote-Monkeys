@@ -100,6 +100,9 @@ module.exports = {
         letterSpacing: '-0.2000000298023224px',
         fontWeight: '400',
       }],
+    },
+    borderRadius: {
+      DEFAULT: '10px',
     }
   },
   plugins: [],
