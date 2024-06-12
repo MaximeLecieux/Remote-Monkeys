@@ -1,5 +1,6 @@
 import { IconProps } from "@/types/iconProps"
 import clsx from "clsx"
+import { Spinner } from "../spinner/spinner"
 
 interface Props {
     size?: "small"
@@ -85,30 +86,39 @@ export const Button = ({
                 className={clsx(
                     variantStyle,
                     sizeStyle,
-                    iconSize
+                    iconSize,
+                    isLoading && "cursor-wait",
+                    "relative"
                 )}
                 onClick={() => console.log('click')}
                 disabled={disabled}
             >
-                {icon && variant === "icon" ? (
-                    <icon.icon size={iconSize}/> // Récupère l'objet icone passé en paramètre
-                ) : (
-                     <> 
-                        <div className={clsx(icon && "flex items-center gap-1")}>
-                        {/* {Ici on place le children en fonction de la position indiqué en paramètre} */}
 
-                        {icon && iconPosition === "left" && ( // Le deuxième && remplace ? "" : ""
-                            <icon.icon size={iconSize}/>
-                        )}
-
-                        {children}
-
-                        {icon && iconPosition === "right" && (
-                            <icon.icon size={iconSize}/>
-                        )}
-                        </div>
-                    </>
+                {isLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        {variant === "accent" || variant === "icon" ? (<Spinner size="small" variant="white"/>) : (<Spinner size="small"/>)}
+                    </div>
                 )}
+
+                <div className={clsx(isLoading && "invisible")}>
+                    {icon && variant === "icon" ? (
+                        <icon.icon size={iconSize}/> // Récupère l'objet icone passé en paramètre
+                    ) : (
+                            <div className={clsx(icon && "flex items-center gap-1")}>
+                                {/* {Ici on place le children en fonction de la position indiqué en paramètre} */}
+
+                                {icon && iconPosition === "left" && ( // Le deuxième && remplace ? "" : ""
+                                    <icon.icon size={iconSize}/>
+                                )}
+
+                                {children}
+
+                                {icon && iconPosition === "right" && (
+                                    <icon.icon size={iconSize}/>
+                                )}
+                            </div>
+                    )}
+                </div>
 
             </button>
         </>
