@@ -1,3 +1,4 @@
+import { IconProps } from "@/types/iconProps"
 import clsx from "clsx"
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
         | "outline"
         | "disabled"
         | "icon"
-    icon?: any
+    icon?: IconProps
     iconTheme?: "accent"
         | "secondary"
         | "gray"
@@ -46,19 +47,34 @@ export const Button = ({
             variantStyle = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed"
             break
         case "icon":
-            variantStyle = ""
+            if(iconTheme === "accent") { // Default
+                variantStyle = "bg-primary hover:bg-primary-400 text-white rounded-full"
+            } else if (iconTheme === "secondary"){
+                variantStyle = "bg-primary-200 hover:bg-primary-300/50 text-primary rounded-full"
+            } else if (iconTheme === "gray"){
+                variantStyle = "bg-gray-700 hover:bg-gray-600 text-white rounded-full"
+            }
             break
     }
 
     switch (size) {
         case "small": 
-            sizeStyle = "text-caption3 font-medium py-[12px] px-[14px]"
+            sizeStyle = `text-caption3 font-medium ${
+                variant === "icon" ? "flex items-center justify-center w-[40px] h-[40px]" : "py-[12px] px-[14px]"
+            }`
+            iconSize = 18
             break
         case "medium": // Default
-            sizeStyle = "text-caption2 font-medium py-[15px] px-[18px]"
+            sizeStyle = `text-caption2 font-medium ${
+                variant === "icon" ? "flex items-center justify-center w-[50px] h-[50px]" : "py-[15px] px-[18px]"
+            }`
+            iconSize = 20
             break
         case "large":
-            sizeStyle = "text-caption1 font-medium py-[18px] px-[22px]"
+            sizeStyle = `text-caption1 font-medium ${
+                variant === "icon" ? "flex items-center justify-center w-[60px] h-[60px]" : "py-[18px] px-[22px]"
+            }`
+            iconSize = 24
             break
     }
 
@@ -69,13 +85,31 @@ export const Button = ({
                 className={clsx(
                     variantStyle,
                     sizeStyle,
-                    iconSize,
-                    ""
+                    iconSize
                 )}
                 onClick={() => console.log('click')}
                 disabled={disabled}
             >
-                {children}
+                {icon && variant === "icon" ? (
+                    <icon.icon size={iconSize}/> // Récupère l'objet icone passé en paramètre
+                ) : (
+                     <> 
+                        <div className={clsx(icon && "flex items-center gap-1")}>
+                        {/* {Ici on place le children en fonction de la position indiqué en paramètre} */}
+
+                        {icon && iconPosition === "left" && ( // Le deuxième && remplace ? "" : ""
+                            <icon.icon size={iconSize}/>
+                        )}
+
+                        {children}
+
+                        {icon && iconPosition === "right" && (
+                            <icon.icon size={iconSize}/>
+                        )}
+                        </div>
+                    </>
+                )}
+
             </button>
         </>
     )

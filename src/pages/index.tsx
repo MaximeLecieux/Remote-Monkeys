@@ -1,22 +1,43 @@
 import { Seo } from '@/ui/components/Seo'
 import { Button } from '@/ui/design-system/button/button'
 import { Typography } from '@/ui/design-system/typography/typography'
+import { RiAccountCircleFill } from "react-icons/ri";
 
 export default function Home() {
   return (
     <>
       <Seo title="Coders Monkeys" description="Description"/>
+
       <div className="flex items-center gap-4 p-10">
         <Button variant="accent">Accent</Button>
         <Button variant="secondary">Accent</Button>
         <Button variant="outline">Accent</Button>
-        <Button variant="disabled" disabled>Accent</Button>
+        <Button variant="disabled">Accent</Button>
+        <Button variant="icon" icon={{ icon: RiAccountCircleFill}}/> {/*On transmet un objet à l'intérieur de icon */}
       </div>
 
       <div className="flex items-center gap-4 p-10">
         <Button variant="accent" size="small">Accent</Button>
         <Button variant="secondary" size="medium">Accent</Button>
         <Button variant="outline" size="large">Accent</Button>
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button variant="icon" size="large" icon={{ icon: RiAccountCircleFill}}/>
+        <Button variant="icon" size="medium" icon={{ icon: RiAccountCircleFill}}/>
+        <Button variant="icon" size="small" icon={{ icon: RiAccountCircleFill}}/>
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button variant="icon" iconTheme="accent" size="large" icon={{ icon: RiAccountCircleFill}}/>
+        <Button variant="icon" iconTheme="gray" size="medium" icon={{ icon: RiAccountCircleFill}}/>
+        <Button variant="icon" iconTheme="secondary" size="small" icon={{ icon: RiAccountCircleFill}}/>
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Button variant="accent" size="small" icon={{ icon: RiAccountCircleFill}} iconPosition="left">Accent</Button>
+        <Button variant="secondary" size="medium" icon={{ icon: RiAccountCircleFill}}>Accent</Button>
+        <Button variant="secondary" size="large" icon={{ icon: RiAccountCircleFill}}>Accent</Button>
       </div>
       
 
