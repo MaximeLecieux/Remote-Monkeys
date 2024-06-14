@@ -3,11 +3,26 @@ import { Button } from '@/ui/design-system/button/button'
 import { Spinner } from '@/ui/design-system/spinner/spinner';
 import { Typography } from '@/ui/design-system/typography/typography'
 import { RiAccountCircleFill } from "react-icons/ri";
+import { Logo } from '@/ui/design-system/logo/logo';
+import { Avatar } from '@/ui/design-system/avatar/avatar';
 
 export default function Home() {
   return (
     <>
       <Seo title="Coders Monkeys" description="Description"/>
+
+      <div className="flex items-center gap-4 p-10">
+        <Logo size="very-small" />
+        <Logo size="small" />
+        <Logo/>
+        <Logo size="large" />
+      </div>
+
+      <div className="flex items-center gap-4 p-10">
+        <Avatar size="small" src="/assets/images/avatar.png" alt="Avatar de Daniel Lincoln" />
+        <Avatar src="/assets/images/avatar.png" alt="Avatar de Daniel Lincoln"/>
+        <Avatar size="large" src="/assets/images/avatar.png" alt="Avatar de Daniel Lincoln"/>
+      </div>
 
       <div className="flex items-center gap-4 p-10">
         <Spinner size="small" />
