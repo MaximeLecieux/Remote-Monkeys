@@ -89,7 +89,7 @@ export default function DesignSystem() {
             <Button variant="secondary" size="large" icon={{ icon: RiAccountCircleFill}}>Accent</Button>
         </div>
         
-        <div className="flex items-center gap-4 p-10">
+        <div className="items-center gap-4 p-10">
             <Typography theme="primary" variant="h1" component="h2">
             Coders Monkey
             </Typography>
