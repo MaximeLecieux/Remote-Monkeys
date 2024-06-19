@@ -6,6 +6,7 @@ import { v4 as uuidv4} from "uuid" // Génère un id
 import { ActiveLink } from "./active-link"
 import { FooterLinks } from "@/types/app-links"
 import { LinkTypes } from "@/lib/link-type"
+import { SocialNetworksButton } from "./social-networks-button"
 
 export const Footer = () => {
 
@@ -58,7 +59,7 @@ export const Footer = () => {
                         </a>
                     </Typography>
                     <div className="">
-                        
+                        <SocialNetworksButton theme="gray"/>
                     </div>
                 </div>
             </Container>

@@ -1,6 +1,8 @@
-import { IconProps } from "@/types/iconProps"
+import { IconProps } from "@/types/icon-props"
 import clsx from "clsx"
 import { Spinner } from "../spinner/spinner"
+import { LinkType, LinkTypes } from "@/lib/link-type"
+import Link from "next/link"
 
 interface Props {
     size?: "small"
@@ -19,6 +21,9 @@ interface Props {
     disabled?: boolean
     isLoading?: boolean
     children?: React.ReactNode
+    baseUrl?: string
+    linkType?: LinkType
+    action?: Function
 }
 
 export const Button = ({
@@ -29,7 +34,10 @@ export const Button = ({
     iconPosition = "right",
     disabled,
     isLoading,
-    children
+    children,
+    baseUrl,
+    linkType = "internal",
+    action = () => {} // Fonction vide par défaut
 }: Props) => {
 
     let variantStyle: string = "", sizeStyle: string = "", iconSize: number = 0
@@ -53,7 +61,7 @@ export const Button = ({
             } else if (iconTheme === "secondary"){
                 variantStyle = "bg-primary-200 hover:bg-primary-300/50 text-primary rounded-full"
             } else if (iconTheme === "gray"){
-                variantStyle = "bg-gray-700 hover:bg-gray-600 text-white rounded-full"
+                variantStyle = "bg-gray-800 hover:bg-gray-700 text-white rounded-full"
             }
             break
     }
@@ -79,48 +87,71 @@ export const Button = ({
             break
     }
 
-    return (
+    const handleClick = () => {
+        if(action) {
+            action()
+        }
+    }
+
+    const buttonContent = (
         <>
-            <button
-                type = "button"
-                className={clsx(
-                    variantStyle,
-                    sizeStyle,
-                    iconSize,
-                    isLoading && "cursor-wait",
-                    "relative animate"
-                )}
-                onClick={() => console.log('click')}
-                disabled={disabled}
-            >
-
-                {isLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        {variant === "accent" || variant === "icon" ? (<Spinner size="small" variant="white"/>) : (<Spinner size="small"/>)}
-                    </div>
-                )}
-
-                <div className={clsx(isLoading && "invisible")}>
-                    {icon && variant === "icon" ? (
-                        <icon.icon size={iconSize}/> // Récupère l'objet icone passé en paramètre
-                    ) : (
-                            <div className={clsx(icon && "flex items-center gap-1")}>
-                                {/* {Ici on place le children en fonction de la position indiqué en paramètre} */}
-
-                                {icon && iconPosition === "left" && ( // Le deuxième && remplace ? "" : ""
-                                    <icon.icon size={iconSize}/>
-                                )}
-
-                                {children}
-
-                                {icon && iconPosition === "right" && (
-                                    <icon.icon size={iconSize}/>
-                                )}
-                            </div>
-                    )}
+            {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    {variant === "accent" || variant === "icon" ? (<Spinner size="small" variant="white"/>) : (<Spinner size="small"/>)}
                 </div>
+            )}
 
-            </button>
+            <div className={clsx(isLoading && "invisible")}>
+                {icon && variant === "icon" ? (
+                    <icon.icon size={iconSize}/> // Récupère l'objet icone passé en paramètre
+                ) : (
+                        <div className={clsx(icon && "flex items-center gap-1")}>
+                            {/* {Ici on place le children en fonction de la position indiqué en paramètre} */}
+
+                            {icon && iconPosition === "left" && ( // Le deuxième && remplace ? "" : ""
+                                <icon.icon size={iconSize}/>
+                            )}
+
+                            {children}
+
+                            {icon && iconPosition === "right" && (
+                                <icon.icon size={iconSize}/>
+                            )}
+                        </div>
+                )}
+            </div>
         </>
     )
+
+    const buttonElement = (
+        <button
+            type = "button"
+            className={clsx(
+                variantStyle,
+                sizeStyle,
+                iconSize,
+                isLoading && "cursor-wait",
+                "relative animate"
+            )}
+            onClick={handleClick}
+            disabled={disabled}
+        >
+            {buttonContent}
+        </button>
+    )
+
+    if (baseUrl) {
+
+        if(linkType === LinkTypes.EXTERNAL) {
+            return (
+                <a href={baseUrl} target="_blank">
+                    {buttonElement}
+                </a>
+            )
+        } else {
+            return <Link href={baseUrl}>{buttonElement}</Link>
+        }
+    }
+
+    return buttonElement
 }
