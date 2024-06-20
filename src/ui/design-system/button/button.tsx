@@ -13,6 +13,7 @@ interface Props {
         | "outline"
         | "disabled"
         | "icon"
+        | "success"
     icon?: IconProps
     iconTheme?: "accent"
         | "secondary"
@@ -54,6 +55,9 @@ export const Button = ({
             break
         case "disabled":
             variantStyle = "bg-gray-400 border border-gray-500 text-gray-600 rounded cursor-not-allowed"
+            break
+        case "success":
+            variantStyle = "bg-secondary hover:bg-secondary-400 text-white rounded"
             break
         case "icon":
             if(iconTheme === "accent") { // Default
