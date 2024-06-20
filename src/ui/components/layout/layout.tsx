@@ -1,17 +1,21 @@
+import { Breadcrumbs } from "../breadcrumbs/breadcrumbs"
 import { Footer } from "../navigation/footer"
 import { Navigation } from "../navigation/navigation"
 
 interface Props {
     children: React.ReactNode
+    isDisplayBreadcrumbs?: boolean
 }
 
 export const Layout = ({
-    children
+    children,
+    isDisplayBreadcrumbs = true
 }: Props) => {
     return (
         <>
         <Navigation />
-            {children}
+        {isDisplayBreadcrumbs && <Breadcrumbs/>}
+        {children}
         <Footer />
         </>
     )
