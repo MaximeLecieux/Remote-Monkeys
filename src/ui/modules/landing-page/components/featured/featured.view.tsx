@@ -105,7 +105,7 @@ export const FeaturedView = () => {
                         </Typography>
                         <Button
                             variant="secondary"
-                            baseUrl="/#"
+                            baseUrl="/connexion/inscription"
                             icon={{icon: RiArrowRightLine}}
                             iconPosition="right"
                         >

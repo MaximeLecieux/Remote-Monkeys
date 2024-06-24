@@ -38,7 +38,7 @@ export const CodersMonkeysSlackView = () => {
                     Rejoins-nous et obtiens de l’aide, des conseils et pourquoi pas des nouveaux potes !
                 </Typography>
                 <Button
-                    baseUrl="/#"
+                    baseUrl="https://coders-monkeys.slack.com"
                     linkType={LinkTypes.EXTERNAL}
                 >
                     Rejoindre le groupe d'aide

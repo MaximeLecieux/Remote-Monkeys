@@ -31,7 +31,7 @@ export const CurentCourseCtaView = () => {
                 >
                     Si tu veux un CV plus sexy que ton ex, suis cette formation complète !
                 </Typography>
-                <a href="/#" target="_blank">
+                <a href="/https://youtube.com/@remotemonkey" target="_blank">
                     <div className="relative bg-gray-400 rounded h-[626px]">
                         <div className="flex flex-col items-center justify-center gap-2 relative h-full bg-gray opacity-0 rounded z-10 hover:opacity-95 animate text-white">
                             <RiPlayCircleLine size={42}/>
