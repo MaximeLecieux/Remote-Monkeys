@@ -31,6 +31,9 @@ interface Props {
         | "white"
         | "primary"
         | "secondary"
+        | "danger"
+        | "success"
+        | "warning"
     weight?: 
         "regular"
         | "medium"
@@ -110,6 +113,15 @@ export const Typography = ({
             break;
         case "secondary":
             themeStyle = "text-secondary"
+            break;
+        case "danger":
+            themeStyle = "text-alert-danger"
+            break;
+        case "warning":
+            themeStyle = "text-alert-warning"
+            break;
+        case "success":
+            themeStyle = "text-alert-success"
             break;
     }
 

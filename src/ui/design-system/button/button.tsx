@@ -25,6 +25,8 @@ interface Props {
     baseUrl?: string
     linkType?: LinkType
     action?: Function
+    type?: "button" | "submit"
+    fullWith?: boolean
 }
 
 export const Button = ({
@@ -38,7 +40,9 @@ export const Button = ({
     children,
     baseUrl,
     linkType = "internal",
-    action = () => {} // Fonction vide par défaut
+    action = () => {}, // Fonction vide par défaut
+    type = "button",
+    fullWith = false
 }: Props) => {
 
     let variantStyle: string = "", sizeStyle: string = "", iconSize: number = 0
@@ -129,16 +133,17 @@ export const Button = ({
 
     const buttonElement = (
         <button
-            type = "button"
+            type = {type}
             className={clsx(
                 variantStyle,
                 sizeStyle,
                 iconSize,
-                isLoading && "cursor-wait",
-                "relative animate"
+                isLoading && "cursor-not-allowed",
+                fullWith && "w-full",
+                "relative animate",
             )}
             onClick={handleClick}
-            disabled={disabled}
+            disabled={disabled || isLoading ? true : false }
         >
             {buttonContent}
         </button>
