@@ -14,6 +14,7 @@ interface Props {
         | "disabled"
         | "icon"
         | "success"
+        | "danger"
     icon?: IconProps
     iconTheme?: "accent"
         | "secondary"
@@ -62,6 +63,9 @@ export const Button = ({
             break
         case "success":
             variantStyle = "bg-secondary hover:bg-secondary-400 text-white rounded"
+            break
+        case "danger":
+            variantStyle = "bg-alert-danger hover:bg-alert-danger/75 text-white rounded"
             break
         case "icon":
             if(iconTheme === "accent") { // Default
